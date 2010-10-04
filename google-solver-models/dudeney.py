@@ -15,7 +15,7 @@
 from constraint_solver import pywrapcp
 
 def dudeney(n):
-  solver = pywrapcp.Solver('Dudeney')
+  solver = pywrapcp.Solver('Dudeney Numbers')
   x = [solver.IntVar(range(10),'x'+str(i)) for i in range(n)]
   nb = solver.IntVar(range(1,10**n),'nb')
   s = solver.IntVar(range(1,9*n+1),'s')
