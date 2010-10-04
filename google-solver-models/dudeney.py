@@ -20,11 +20,7 @@ def dudeney(n):
   nb = solver.IntVar(range(1,10**n),'nb')
   s = solver.IntVar(range(1,9*n+1),'s')
 
-  #solver.Add(nb == s*s*s)
-  
-  s1 = solver.IntVar(range(1,9*n+1),'s1')
-  solver.Add(s1 == s)
-  solver.Add(nb == s*s1*s)
+  solver.Add(nb == s*s*s)
   
   solver.Add(sum([10**(n-i-1)*x[i] for i in range(n)]) == nb)
   solver.Add(sum([x[i] for i in range(n)]) == s)
