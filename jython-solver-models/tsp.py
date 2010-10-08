@@ -51,6 +51,6 @@ search.solveMinimize(dist)
 print "time:",time()-t1
 print "#bkts:",search.getNbBkts()
 print "time in fix point:",cp.getTimeInFixPoint()
-print "time in trail restore:",cp.getTrail().getTimeInRestore();
-print "max trail size:",cp.getTrail().getMaxSize();
+print "time in trail restore:",cp.getTrail().getTimeInRestore()
+print "max trail size:",cp.getTrail().getMaxSize()
 
