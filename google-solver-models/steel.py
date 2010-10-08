@@ -70,13 +70,14 @@ class SteelDecisionBuilder(object):
                 decision = solver.AssignVariableValue(var,var.Min())
                 return decision
         else:
+            print "next:",[x[o].Bound() for o in range(nbslab)]
             return None
     def maxbound(self):
         ''' returns the maximum value bound to a variable, -1 if no variables bound'''
         return max([-1]+[x[o].Min() for o in range(nbslab) if x[o].Bound()])
     def getnextvar(self):
         ''' mindom size heuristic with tie break on the weights of orders '''
-        res = [(x[o].Size(),-weights[0],x[o]) for o in range(nbslab) if not x[o].Bound()]
+        res = [(x[o].Size(),-weights[o],x[o]) for o in range(nbslab) if not x[o].Bound()]
         if res:
             res.sort()
             return res[0][2]
