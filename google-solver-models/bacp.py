@@ -53,7 +53,7 @@ def main(unused_argv):
   nb_courses = len(credits)
   
   
-  solver = pywrapcp.Solver('Steel Mill Slab')
+  solver = pywrapcp.Solver('Balanced Academic Curriculum Problem')
   
   
   x = [solver.IntVar(0, nb_periods - 1, 'x' + str(i)) for i in range(nb_courses)]
