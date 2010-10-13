@@ -31,6 +31,13 @@ weights = [x[0] for x in wc]
 cols = [x[1] for x in wc]
 loss = [min(filter(lambda x: x>=c,capa))-c   for c in range(maxcapa+1)]
 colorOrders = [filter(lambda o: cols[o]==c,range(nbslab)) for c in range(1,nbcol+1)]
+nbslab = 32
+print weights
+a = weights[:nbslab]
+a.sort()
+print "=>",a
+print loss
+print maxcapa
 #-------------------------------------------------------------------------------------
 
 cp = Solver()
@@ -38,11 +45,11 @@ cp = Solver()
 x = [VarInt(cp,0,nbslab-1) for s in range(nbslab)]
 l = [VarInt(cp,0,maxcapa) for s in range(nbslab)]
 obj = VarInt(cp,0,nbslab*maxcapa)
-cp.post(binpacking(x,weights,l))
+cp.post(binpacking(x,weights[:nbslab],l))
 cp.post(sum_([element(loss,l[s]) for s in range(nbslab)],obj))
 
-for s in range(nbslab):
-    cp.post(sumleq([or_([x[o].isEq(s) for o in colorOrders[c]]) for c in range(nbcol)],2))
+#for s in range(nbslab):
+#    cp.post(sumleq([or_([x[o].isEq(s) for o in colorOrders[c]]) for c in range(nbcol)],2))
     
 
 x_ = [] #current best solution
@@ -52,6 +59,7 @@ y = [x[ind] for ind in sorted(range(nbslab),cmp=lambda i,j: weights[j]-weights[i
 def onsol():
     global x_
     x_ = [x[o].getValue() for o in range(nbslab)]
+    print x_
 
 def relax():
     for i  in range(nbslab):
